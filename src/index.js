@@ -6,8 +6,6 @@ const { PluginError, File } = gutil;
 const PLUGIN_NAME = 'gulp-react-nexus-style';
 
 module.exports = function(cachebust = []) {
-  let styles = [];
-  let queue = [];
   cachebust.forEach((module) => {
     let r = require.resolve(module);
     if(require.cache[r]) {
