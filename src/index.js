@@ -26,10 +26,11 @@ module.exports = function(cachebust = []) {
       if(require.cache[r]) {
         delete require.cache[r];
       }
-      this.push(new File({
-        path: gutil.replaceExtension(path, 'css'),
-        contents: new Buffer(extractStyles(require(path))),
-      }));
+      let Component = require(path);
+      let styles = extractStyles(Component);
+      let contents = new Buffer(styles);
+      path = gutil.replaceExtension(path, 'css');
+      this.push(new File({ path, contents }));
     }
     catch(err) {
       return fn(err);
