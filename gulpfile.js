@@ -13,13 +13,7 @@ var sourcemaps = require('gulp-sourcemaps');
 function lint() {
   return gulp.src('src/**/*.js')
   .pipe(plumber())
-  .pipe(jshint({
-    globals: {
-      Promise: true,
-    },
-    esnext: true,
-    sub: true,
-  }))
+  .pipe(jshint())
   .pipe(jshint.reporter(stylish));
 }
 
@@ -27,7 +21,7 @@ function build() {
   return gulp.src('src/**/*.js')
   .pipe(plumber())
   .pipe(sourcemaps.init())
-  .pipe(insert.prepend('require(\'6to5/polyfill\');\nvar Promise = require(\'bluebird\');\n'))
+  .pipe(insert.prepend('require(\'6to5/polyfill\'); const Promise = require(\'bluebird\'); const __DEV__ = (process.env.NODE_ENV !== \'production\');\n'))
   .pipe(es6to5())
   .pipe(sourcemaps.write())
   .pipe(gulp.dest('dist'));
