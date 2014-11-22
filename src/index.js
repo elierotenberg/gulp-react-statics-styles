@@ -13,7 +13,7 @@ module.exports = function(cachebust = []) {
     }
   });
 
-  return through.obj((file, enc, fn) => {
+  return through.obj(function(file, enc, fn) {
     if(file.isNull()) {
       return fn(null, file);
     }
