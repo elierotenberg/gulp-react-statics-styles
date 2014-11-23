@@ -29,12 +29,9 @@
   },
   "dependencies": {
     "6to5": "^1.13.10",
-    "bluebird": "^2.3.11",
-    "co": "^4.0.0",
     "gulp-util": "^3.0.1",
-    "lodash-next": "^1.7.0",
-    "react-nexus-style": "^0.2.2",
-    "should": "^4.3.0",
+    "lodash-next": "^1.8.0",
+    "react-nexus-style": "^0.2.3",
     "through2": "^0.6.3"
   }
 }
