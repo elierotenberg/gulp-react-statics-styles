@@ -28,7 +28,7 @@
     "jshint-stylish": "^1.0.0"
   },
   "dependencies": {
-    "6to5": "^1.13.0",
+    "6to5": "^1.13.10",
     "bluebird": "^2.3.11",
     "co": "^4.0.0",
     "gulp-util": "^3.0.1",
