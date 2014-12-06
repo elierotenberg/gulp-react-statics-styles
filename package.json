@@ -30,8 +30,8 @@
   "dependencies": {
     "6to5": "^1.14.16",
     "gulp-util": "^3.0.1",
-    "lodash-next": "^1.9.1",
-    "react-nexus-style": "^0.2.8",
+    "lodash-next": "^1.9.2",
+    "react-nexus-style": "^0.2.9",
     "through2": "^0.6.3"
   }
 }
