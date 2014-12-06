@@ -28,10 +28,10 @@
     "jshint-stylish": "^1.0.0"
   },
   "dependencies": {
-    "6to5": "^1.14.16",
+    "6to5": "^1.14.17",
     "gulp-util": "^3.0.1",
-    "lodash-next": "^1.9.2",
-    "react-nexus-style": "^0.2.9",
+    "lodash-next": "^1.10.1",
+    "react-nexus-style": "^0.2.10",
     "through2": "^0.6.3"
   }
 }
