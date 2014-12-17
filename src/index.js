@@ -33,7 +33,7 @@ module.exports = function(cachebust = []) {
         contents = new Buffer(styles);
       }
       catch(err) {
-        return;
+        return fn(null);
       }
       path = gutil.replaceExtension(path, '.css');
       this.push(new File({ path, contents }));
