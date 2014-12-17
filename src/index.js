@@ -7,7 +7,7 @@ const PLUGIN_NAME = 'gulp-react-nexus-style';
 
 module.exports = function(cachebust = []) {
   cachebust.forEach((module) => {
-    let r = require.resolve(module);
+    const r = require.resolve(module);
     if(require.cache[r]) {
       delete require.cache[r];
     }
@@ -22,13 +22,19 @@ module.exports = function(cachebust = []) {
     }
     let { path } = file;
     try {
-      let r = require.resolve(path);
+      const r = require.resolve(path);
       if(require.cache[r]) {
         delete require.cache[r];
       }
-      let Component = require(path);
-      let styles = extractStyles(Component);
-      let contents = new Buffer(styles);
+      const Component = require(path);
+      const styles = extractStyles(Component);
+      let contents;
+      try {
+        contents = new Buffer(styles);
+      }
+      catch(err) {
+        return;
+      }
       path = gutil.replaceExtension(path, '.css');
       this.push(new File({ path, contents }));
     }

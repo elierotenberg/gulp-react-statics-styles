@@ -35,7 +35,12 @@ module.exports = function (cachebust) {
       }
       var Component = require(path);
       var styles = extractStyles(Component);
-      var contents = new Buffer(styles);
+      var contents;
+      try {
+        contents = new Buffer(styles);
+      } catch (err) {
+        return;
+      }
       path = gutil.replaceExtension(path, ".css");
       this.push(new File({ path: path, contents: contents }));
     } catch (err) {
