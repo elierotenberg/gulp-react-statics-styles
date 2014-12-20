@@ -1,22 +1,12 @@
 const through = require('through2');
 const gutil = require('gulp-util');
+const { join } = require('path');
 const { extractStyles } = require('react-nexus-style');
 const { PluginError, File } = gutil;
 
 const PLUGIN_NAME = 'gulp-react-nexus-style';
 
-function vrequire(file, paths) {
-  const { contents, path } = file;
-  let Module = module.constructor;
-  const m = new Module();
-  m.paths = paths;
-  m._compile(contents.toString(), path);
-  return m.exports;
-}
-
-module.exports = function(mod) {
-  const { paths } = mod || module;
-
+module.exports = function() {
   return through.obj(function(file, enc, fn) {
     if(file.isNull()) {
       return fn(null, file);
@@ -24,9 +14,10 @@ module.exports = function(mod) {
     if(file.isStream()) {
       return fn(new PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    let { path } = file;
+    let { cwd, base, path, relative } = file;
     try {
-      const Component = vrequire(file, paths);
+      const moduleFile = join(cwd, base, relative);
+      const Component = require(moduleFile);
       const styles = extractStyles(Component);
       let contents;
       try {
