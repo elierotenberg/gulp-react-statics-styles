@@ -11,23 +11,20 @@ var File = gutil.File;
 
 var PLUGIN_NAME = "gulp-react-nexus-style";
 
-function vrequire(file) {
+function vrequire(file, paths) {
   var contents = file.contents;
   var path = file.path;
   var Module = module.constructor;
   var m = new Module();
+  m.paths = paths;
   m._compile(contents.toString(), path);
   return m.exports;
 }
 
-module.exports = function (cachebust) {
-  if (cachebust === undefined) cachebust = [];
-  cachebust.forEach(function (module) {
-    var r = require.resolve(module);
-    if (require.cache[r]) {
-      delete require.cache[r];
-    }
-  });
+module.exports = function (mod) {
+  var _ref2 = mod || module;
+  var paths = _ref2.paths;
+
 
   return through.obj(function (file, enc, fn) {
     if (file.isNull()) {
@@ -38,7 +35,7 @@ module.exports = function (cachebust) {
     }
     var path = file.path;
     try {
-      var Component = vrequire(file);
+      var Component = vrequire(file, paths);
       var styles = extractStyles(Component);
       var contents;
       try {

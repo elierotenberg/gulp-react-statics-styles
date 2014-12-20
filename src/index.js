@@ -5,22 +5,17 @@ const { PluginError, File } = gutil;
 
 const PLUGIN_NAME = 'gulp-react-nexus-style';
 
-function vrequire(file) {
+function vrequire(file, paths) {
   const { contents, path } = file;
   let Module = module.constructor;
   const m = new Module();
-  m.paths = module.paths;
+  m.paths = paths;
   m._compile(contents.toString(), path);
   return m.exports;
 }
 
-module.exports = function(cachebust = []) {
-  cachebust.forEach((module) => {
-    const r = require.resolve(module);
-    if(require.cache[r]) {
-      delete require.cache[r];
-    }
-  });
+module.exports = function(mod) {
+  const { paths } = mod || module;
 
   return through.obj(function(file, enc, fn) {
     if(file.isNull()) {
@@ -31,7 +26,7 @@ module.exports = function(cachebust = []) {
     }
     let { path } = file;
     try {
-      const Component = vrequire(file);
+      const Component = vrequire(file, paths);
       const styles = extractStyles(Component);
       let contents;
       try {
