@@ -9,6 +9,7 @@ function vrequire(file) {
   const { contents, path } = file;
   let Module = module.constructor;
   const m = new Module();
+  m.paths = module.paths;
   m._compile(contents.toString(), path);
   return m.exports;
 }
