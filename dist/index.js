@@ -22,12 +22,11 @@ module.exports = function () {
     if (file.isStream()) {
       return fn(new PluginError(PLUGIN_NAME, "Streaming not supported"));
     }
-    var cwd = file.cwd;
     var base = file.base;
     var path = file.path;
     var relative = file.relative;
     try {
-      var moduleFile = join(cwd, base, relative);
+      var moduleFile = join(base, relative);
       var Component = require(moduleFile);
       var styles = extractStyles(Component);
       var contents;

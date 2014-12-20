@@ -14,9 +14,9 @@ module.exports = function() {
     if(file.isStream()) {
       return fn(new PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    let { cwd, base, path, relative } = file;
+    let { base, path, relative } = file;
     try {
-      const moduleFile = join(cwd, base, relative);
+      const moduleFile = join(base, relative);
       const Component = require(moduleFile);
       const styles = extractStyles(Component);
       let contents;
