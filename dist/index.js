@@ -7,9 +7,18 @@ var _ref = require("react-nexus-style");
 var extractStyles = _ref.extractStyles;
 var PluginError = gutil.PluginError;
 var File = gutil.File;
-var vrequire = require("vinyl-require");
+
 
 var PLUGIN_NAME = "gulp-react-nexus-style";
+
+function vrequire(file) {
+  var contents = file.contents;
+  var path = file.path;
+  var Module = module.constructor;
+  var m = new Module();
+  m._compile(contents, path);
+  return m.exports;
+}
 
 module.exports = function (cachebust) {
   if (cachebust === undefined) cachebust = [];

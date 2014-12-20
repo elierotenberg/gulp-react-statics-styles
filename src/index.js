@@ -2,9 +2,16 @@ const through = require('through2');
 const gutil = require('gulp-util');
 const { extractStyles } = require('react-nexus-style');
 const { PluginError, File } = gutil;
-const vrequire = require('vinyl-require');
 
 const PLUGIN_NAME = 'gulp-react-nexus-style';
+
+function vrequire(file) {
+  const { contents, path } = file;
+  let Module = module.constructor;
+  const m = new Module();
+  m._compile(contents, path);
+  return m.exports;
+}
 
 module.exports = function(cachebust = []) {
   cachebust.forEach((module) => {
