@@ -16,7 +16,7 @@ function vrequire(file) {
   var path = file.path;
   var Module = module.constructor;
   var m = new Module();
-  m._compile(contents, path);
+  m._compile(contents.toString(), path);
   return m.exports;
 }
 
