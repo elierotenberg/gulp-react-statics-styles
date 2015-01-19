@@ -1,8 +1,7 @@
-const through = require('through2');
-const gutil = require('gulp-util');
-const { join } = require('path');
-const { extractStyles } = require('react-nexus-style');
-const { PluginError, File } = gutil;
+import through from 'through2';
+import { PluginError, File, replaceExtension } from 'gulp-util';
+import { join } from 'path';
+import { extractStyles } from 'react-nexus-style';
 
 const PLUGIN_NAME = 'gulp-react-nexus-style';
 
@@ -26,7 +25,7 @@ module.exports = function() {
       catch(err) {
         return fn(null);
       }
-      path = gutil.replaceExtension(path, '.css');
+      path = replaceExtension(path, '.css');
       this.push(new File({ path, contents }));
     }
     catch(err) {
