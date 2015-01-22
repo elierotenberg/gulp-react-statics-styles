@@ -1,9 +1,9 @@
 import through from 'through2';
 import { PluginError, File, replaceExtension } from 'gulp-util';
 import { join } from 'path';
-import { extractStyles } from 'react-nexus-style';
+import { extractStyles } from 'react-statics-styles';
 
-const PLUGIN_NAME = 'gulp-react-nexus-style';
+const PLUGIN_NAME = 'gulp-react-statics-styles';
 
 module.exports = function() {
   return through.obj(function(file, enc, fn) {

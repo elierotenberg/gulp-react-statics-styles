@@ -1,7 +1,7 @@
-gulp React Nexus Style
-======================
+Gulp React Statics Style
+========================
 
-gulp wrapper for [`react-nexus-style`](https://github.com/elierotenberg/react-nexus-style).
+gulp wrapper for [`react-statics-styles`](https://github.com/elierotenberg/react-statics-styles).
 Its takes components source files which export component definitions, and gives CSS files.
 
 Usage
@@ -23,7 +23,7 @@ module.exports = MyComponent;
 In your `gulpfile.js`:
 
 ```js
-var style = require('react-nexus-style');
+var style = require('gulp-react-statics-styles');
 var react = require('gulp-react');
 
 gulp.task('componentsCSS', function() {
@@ -40,7 +40,7 @@ You can combine this with any JS preprocessor or CSS postprocessor, for example 
 gulp.src('src/**/*.jsx')
 .pipe(require('gulp-react')())
 .pipe(require('gulp-6to5')({ runtime: true }))
-.pipe(require('react-nexus-style')())
+.pipe(require('gulp-react-statics-styles')())
 .pipe(require('gulp-contact')())
 .pipe(require('gulp-postcss')([require('autoprefixer-core'), require('csswring')]))
 .pipe(gulp.dest('static/components.css'));

@@ -22,10 +22,10 @@ var PluginError = require("gulp-util").PluginError;
 var File = require("gulp-util").File;
 var replaceExtension = require("gulp-util").replaceExtension;
 var join = require("path").join;
-var extractStyles = require("react-nexus-style").extractStyles;
+var extractStyles = require("react-statics-styles").extractStyles;
 
 
-var PLUGIN_NAME = "gulp-react-nexus-style";
+var PLUGIN_NAME = "gulp-react-statics-styles";
 
 module.exports = function () {
   return through.obj(function (file, enc, fn) {
