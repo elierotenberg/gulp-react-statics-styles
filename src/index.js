@@ -16,6 +16,10 @@ module.exports = function() {
     let { base, path, relative } = file;
     try {
       const moduleFile = join(base, relative);
+      const moduleName = require.resolve(moduleFile);
+      if(require.cache[moduleName] !== void 0) {
+        delete require.cache[moduleName];
+      }
       const Component = require(moduleFile);
       const styles = extractStyles(Component);
       let contents;

@@ -1,10 +1,8 @@
 "use strict";
 
-var _interopRequire = function (obj) {
-  return obj && (obj["default"] || obj);
-};
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-require("6to5/polyfill");
+require("babel/polyfill");
 var _ = require("lodash");
 var should = require("should");
 var Promise = (global || window).Promise = require("bluebird");
@@ -18,9 +16,11 @@ if (__DEV__) {
 }
 var through = _interopRequire(require("through2"));
 
-var PluginError = require("gulp-util").PluginError;
-var File = require("gulp-util").File;
-var replaceExtension = require("gulp-util").replaceExtension;
+var _gulpUtil = require("gulp-util");
+
+var PluginError = _gulpUtil.PluginError;
+var File = _gulpUtil.File;
+var replaceExtension = _gulpUtil.replaceExtension;
 var join = require("path").join;
 var extractStyles = require("react-statics-styles").extractStyles;
 
@@ -40,6 +40,10 @@ module.exports = function () {
     var relative = file.relative;
     try {
       var moduleFile = join(base, relative);
+      var moduleName = require.resolve(moduleFile);
+      if (require.cache[moduleName] !== void 0) {
+        delete require.cache[moduleName];
+      }
       var Component = require(moduleFile);
       var styles = extractStyles(Component);
       var contents = undefined;
