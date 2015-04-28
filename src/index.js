@@ -5,7 +5,7 @@ import { extractStyles } from 'react-statics-styles';
 
 const PLUGIN_NAME = 'gulp-react-statics-styles';
 
-function Wrapper() {
+export default () => {
   return through.obj((file, enc, fn) => {
     if(file.isNull()) {
       return fn(null, file);
@@ -37,6 +37,4 @@ function Wrapper() {
     }
     return fn(null);
   });
-}
-
-export default Wrapper;
+};

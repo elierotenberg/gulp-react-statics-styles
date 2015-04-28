@@ -31,9 +31,7 @@ if (__DEV__) {
 
 var PLUGIN_NAME = 'gulp-react-statics-styles';
 
-function Wrapper() {
-  var _this = this;
-
+exports['default'] = function () {
   return _through2['default'].obj(function (file, enc, fn) {
     if (file.isNull()) {
       return fn(null, file);
@@ -60,13 +58,12 @@ function Wrapper() {
         return fn(null);
       }
       path = _PluginError$File$replaceExtension.replaceExtension(path, '.css');
-      _this.push(new _PluginError$File$replaceExtension.File({ path: path, contents: contents }));
+      undefined.push(new _PluginError$File$replaceExtension.File({ path: path, contents: contents }));
     } catch (err) {
       return fn(err);
     }
     return fn(null);
   });
-}
+};
 
-exports['default'] = Wrapper;
 module.exports = exports['default'];
