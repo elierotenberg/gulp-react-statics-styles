@@ -5,7 +5,7 @@ import { extractStyles } from 'react-statics-styles';
 
 const PLUGIN_NAME = 'gulp-react-statics-styles';
 
-export default () => {
+module.exports = function() { // eslint-disable-line func-names
   return through.obj((file, enc, fn) => {
     if(file.isNull()) {
       return fn(null, file);

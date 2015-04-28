@@ -2,10 +2,6 @@
 
 var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
 var _through = require('through2');
 
 var _through2 = _interopRequireDefault(_through);
@@ -31,7 +27,10 @@ if (__DEV__) {
 
 var PLUGIN_NAME = 'gulp-react-statics-styles';
 
-exports['default'] = function () {
+module.exports = function () {
+  var _this = this;
+
+  // eslint-disable-line func-names
   return _through2['default'].obj(function (file, enc, fn) {
     if (file.isNull()) {
       return fn(null, file);
@@ -58,12 +57,10 @@ exports['default'] = function () {
         return fn(null);
       }
       path = _PluginError$File$replaceExtension.replaceExtension(path, '.css');
-      undefined.push(new _PluginError$File$replaceExtension.File({ path: path, contents: contents }));
+      _this.push(new _PluginError$File$replaceExtension.File({ path: path, contents: contents }));
     } catch (err) {
       return fn(err);
     }
     return fn(null);
   });
 };
-
-module.exports = exports['default'];
