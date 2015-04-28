@@ -29,11 +29,11 @@
   },
   "dependencies": {
     "babel": "^5.1.13",
-    "bluebird": "^2.9.24",
+    "bluebird": "^2.9.25",
     "lodash": "^3.7.0",
     "react-statics-styles": "^1.1.5",
     "recase": "^1.0.4",
     "should": "^6.0.1",
-    "through2": "^0.6.3"
+    "through2": "^0.6.5"
   }
 }
