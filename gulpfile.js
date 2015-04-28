@@ -18,10 +18,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var plumber = require('gulp-plumber');
 var prepend = require('gulp-insert').prepend;
-var sourcemaps = require('gulp-sourcemaps');
-var stylish = require('jshint-stylish');
-
-var readPrelude = fs.readFileAsync('./__prelude.js');
 
 var readPrelude = fs.readFileAsync('./__prelude.js');
 
