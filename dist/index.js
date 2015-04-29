@@ -58,7 +58,7 @@ function processFile(_ref, fn) {
 }
 
 exports['default'] = function () {
-  return _through2['default'].obj(function (file, enc, fn) {
+  return _through2['default'].obj(function enqueueFile(file, enc, fn) {
     void enc;
     if (file.isNull()) {
       return fn(null, file);
@@ -66,7 +66,7 @@ exports['default'] = function () {
     if (file.isStream()) {
       return fn(new _PluginError$File$replaceExtension.PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    return processFile.call(undefined, file, fn);
+    return processFile.call(this, file, fn);
   });
 };
 

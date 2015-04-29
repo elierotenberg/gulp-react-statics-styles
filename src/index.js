@@ -29,7 +29,7 @@ function processFile({ base, path, relative }, fn) {
   return fn(null);
 }
 
-export default () => through.obj((file, enc, fn) => {
+export default () => through.obj(function enqueueFile(file, enc, fn) {
   void enc;
   if(file.isNull()) {
     return fn(null, file);
