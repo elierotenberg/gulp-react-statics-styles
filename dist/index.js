@@ -2,6 +2,10 @@
 
 var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
 var _through = require('through2');
 
 var _through2 = _interopRequireDefault(_through);
@@ -27,40 +31,43 @@ if (__DEV__) {
 
 var PLUGIN_NAME = 'gulp-react-statics-styles';
 
-module.exports = function () {
-  var _this = this;
+function processFile(_ref, fn) {
+  var base = _ref.base;
+  var path = _ref.path;
+  var relative = _ref.relative;
 
-  // eslint-disable-line func-names
+  try {
+    var moduleFile = _join.join(base, relative);
+    var moduleName = require.resolve(moduleFile);
+    if (require.cache[moduleName] !== void 0) {
+      delete require.cache[moduleName];
+    }
+    var Component = require(moduleFile);
+    var styles = _extractStyles.extractStyles(Component);
+    var contents = undefined;
+    try {
+      contents = new Buffer(styles);
+    } catch (err) {
+      return fn(null);
+    }
+    this.push(new _PluginError$File$replaceExtension.File({ path: _PluginError$File$replaceExtension.replaceExtension(path, '.css'), contents: contents }));
+  } catch (err) {
+    return fn(err);
+  }
+  return fn(null);
+}
+
+exports['default'] = function () {
   return _through2['default'].obj(function (file, enc, fn) {
+    void enc;
     if (file.isNull()) {
       return fn(null, file);
     }
     if (file.isStream()) {
       return fn(new _PluginError$File$replaceExtension.PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
-    var base = file.base;
-    var path = file.path;
-    var relative = file.relative;
-
-    try {
-      var moduleFile = _join.join(base, relative);
-      var moduleName = require.resolve(moduleFile);
-      if (require.cache[moduleName] !== void 0) {
-        delete require.cache[moduleName];
-      }
-      var Component = require(moduleFile);
-      var styles = _extractStyles.extractStyles(Component);
-      var contents = undefined;
-      try {
-        contents = new Buffer(styles);
-      } catch (err) {
-        return fn(null);
-      }
-      path = _PluginError$File$replaceExtension.replaceExtension(path, '.css');
-      _this.push(new _PluginError$File$replaceExtension.File({ path: path, contents: contents }));
-    } catch (err) {
-      return fn(err);
-    }
-    return fn(null);
+    return processFile.call(undefined, file, fn);
   });
 };
+
+module.exports = exports['default'];
