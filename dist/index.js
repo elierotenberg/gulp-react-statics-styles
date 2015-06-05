@@ -1,22 +1,23 @@
 'use strict';
 
-var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
+var _Object$defineProperty = require('babel-runtime/core-js/object/define-property')['default'];
 
-Object.defineProperty(exports, '__esModule', {
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+_Object$defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _through = require('through2');
+var _through2 = require('through2');
 
-var _through2 = _interopRequireDefault(_through);
+var _through22 = _interopRequireDefault(_through2);
 
-var _PluginError$File$replaceExtension = require('gulp-util');
+var _gulpUtil = require('gulp-util');
 
-var _join = require('path');
+var _path = require('path');
 
-var _extractStyles = require('react-statics-styles');
+var _reactStaticsStyles = require('react-statics-styles');
 
-require('babel/polyfill');
 var _ = require('lodash');
 var should = require('should');
 var Promise = (global || window).Promise = require('bluebird');
@@ -37,20 +38,20 @@ function processFile(_ref, fn) {
   var relative = _ref.relative;
 
   try {
-    var moduleFile = _join.join(base, relative);
+    var moduleFile = (0, _path.join)(base, relative);
     var moduleName = require.resolve(moduleFile);
     if (require.cache[moduleName] !== void 0) {
       delete require.cache[moduleName];
     }
     var Component = require(moduleFile);
-    var styles = _extractStyles.extractStyles(Component);
+    var styles = (0, _reactStaticsStyles.extractStyles)(Component);
     var contents = undefined;
     try {
       contents = new Buffer(styles);
     } catch (err) {
       return fn(null);
     }
-    this.push(new _PluginError$File$replaceExtension.File({ path: _PluginError$File$replaceExtension.replaceExtension(path, '.css'), contents: contents }));
+    this.push(new _gulpUtil.File({ path: (0, _gulpUtil.replaceExtension)(path, '.css'), contents: contents }));
   } catch (err) {
     return fn(err);
   }
@@ -58,13 +59,13 @@ function processFile(_ref, fn) {
 }
 
 exports['default'] = function () {
-  return _through2['default'].obj(function enqueueFile(file, enc, fn) {
+  return _through22['default'].obj(function enqueueFile(file, enc, fn) {
     void enc;
     if (file.isNull()) {
       return fn(null, file);
     }
     if (file.isStream()) {
-      return fn(new _PluginError$File$replaceExtension.PluginError(PLUGIN_NAME, 'Streaming not supported'));
+      return fn(new _gulpUtil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
     return processFile.call(this, file, fn);
   });
