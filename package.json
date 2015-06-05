@@ -25,7 +25,6 @@
     "gulp-babel": "^5.1.0",
     "gulp-eslint": "^0.13.0",
     "gulp-insert": "^0.4.0",
-    "gulp-plumber": "^1.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.5"
@@ -35,7 +34,7 @@
     "babel-runtime": "^5.4.7",
     "bluebird": "^2.9.27",
     "lodash": "^3.9.3",
-    "react-statics-styles": "^1.2.0",
+    "react-statics-styles": "^2.0.0",
     "recase": "^1.0.4",
     "should": "^6.0.3",
     "through2": "^0.6.5"

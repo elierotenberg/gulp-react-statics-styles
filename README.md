@@ -2,47 +2,47 @@ Gulp React Statics Style
 ========================
 
 gulp wrapper for [`react-statics-styles`](https://github.com/elierotenberg/react-statics-styles).
-Its takes components source files which export component definitions, and gives CSS files.
+Its takes components source files which export component definitions, and gives CSS files. You can then pipe it to other processors, such as `gulp-postcss`.
 
 Usage
 =====
 
 In a component file (eg. `MyComponent.jsx`):
 ```js
-var MyComponent = React.createClass({
-  statics: {
-    styles: {
-        ...
-      }
-    }
+import { styles } from 'react-statics-styles';
+
+@styles({
+  '.MyComponent': {
+    transform: 'translate(-50%,-50%)',
+  },
+})
+class MyComponent extends React.Component {
   ...
-});
-module.exports = MyComponent;
+}
+
+export default MyComponent;
 ```
 
 In your `gulpfile.js`:
 
 ```js
-var style = require('gulp-react-statics-styles');
-var react = require('gulp-react');
+var styles = require('gulp-react-statics-styles');
 
 gulp.task('componentsCSS', function() {
   return gulp.src('src/**/*.jsx')
-    .pipe(react())
-    .pipe(style())
+    .pipe(babel())
+    .pipe(styles())
   .pipe(gulp.dest('static/'));
 });
 ```
 
-You can combine this with any JS preprocessor or CSS postprocessor, for example if you use `6to5` for JS, and `autoprefixer-core` and `csswring` for CSS (via `postcss`):
+You can combine this with any JS preprocessor or CSS postprocessor, for example if you use `babel` for JS, and `autoprefixer-core` and `csswring` for CSS (via `postcss`):
 
 ```js
 gulp.src('src/**/*.jsx')
-.pipe(require('gulp-react')())
-.pipe(require('gulp-6to5')({ runtime: true }))
-.pipe(require('gulp-react-statics-styles')())
-.pipe(require('gulp-contact')())
-.pipe(require('gulp-postcss')([require('autoprefixer-core'), require('csswring')]))
+  .pipe(babel())
+  .pipe(styles())
+  .pipe(postcss([autoprefixer, csswring]))
 .pipe(gulp.dest('static/components.css'));
 ```
 
