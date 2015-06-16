@@ -7,6 +7,8 @@ Its takes components source files which export component definitions, and gives 
 Usage
 =====
 
+This module is written in ES6/7. You will need `babel` to run it.
+
 In a component file (eg. `MyComponent.jsx`):
 ```js
 import { styles } from 'react-statics-styles';
