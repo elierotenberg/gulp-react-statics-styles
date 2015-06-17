@@ -7,7 +7,16 @@ Its takes components source files which export component definitions, and gives 
 Usage
 =====
 
+<<<<<<< HEAD
 This module is written in ES6/7. You will need `babel` to run it.
+=======
+1. Fork or clone this repository.
+2. (Optional) Edit `package.json` if you intent to publish your package on `npm`.
+3. `npm install` to install all the required dependencies from `npm`.
+4. Hack `src/index.jsx` and `src/__tests__/index.jsx`.
+5. Lint/test using `gulp`.
+6. Don't forget to edit this `README.md` file.
+>>>>>>> starterkit/master
 
 In a component file (eg. `MyComponent.jsx`):
 ```js
@@ -22,8 +31,15 @@ class MyComponent extends React.Component {
   ...
 }
 
+<<<<<<< HEAD
 export default MyComponent;
 ```
+=======
+- Sanely configured `gulpfile.js`, `package.json`, `.gitignore`, `.editorconfig`, `.eslintrc`, `.jsbeautifyrc`.
+- Both CommonJS and ES6 modules are supported.
+- Linting and testing is pre-configured.
+- `lodash`, `bluebird` and `should` are included by default.
+>>>>>>> starterkit/master
 
 In your `gulpfile.js`:
 

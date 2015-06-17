@@ -2,7 +2,9 @@
   "name": "gulp-react-statics-styles",
   "version": "4.0.0",
   "description": "",
-  "main": "src/index.js",
+  "license": "MIT",
+  "author": "Elie Rotenberg <elie@rotenberg.io>",
+  "main": "src/index.jsx",
   "repository": {
     "type": "git",
     "url": "https://github.com/elierotenberg/gulp-react-statics-styles.git"
@@ -27,8 +29,9 @@
   },
   "dependencies": {
     "bluebird": "^2.9.30",
+    "gulp-util": "^3.0.5",
     "lodash": "^3.9.3",
-    "react-statics-styles": "^3.0.0",
+    "react-statics-styles": "^3.0.1",
     "recase": "^1.0.4",
     "should": "^6.0.3",
     "through2": "^2.0.0"
